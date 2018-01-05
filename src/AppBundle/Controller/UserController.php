@@ -7,11 +7,14 @@ use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class UserController extends Controller
 {
     /**
      * @Route("/users", name="user_list")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function listAction()
     {
@@ -20,6 +23,7 @@ class UserController extends Controller
 
     /**
      * @Route("/users/create", name="user_create")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function createAction(Request $request)
     {
@@ -49,6 +53,15 @@ class UserController extends Controller
      */
     public function editAction(User $user, Request $request)
     {
+        $roleUser = false; // stop roles hacking
+
+        if ($this->getUser()->getRoles() !== array('ROLE_ADMIN')) {
+             if ($user->getId() !== $this->getUser()->getId()) {
+                throw new AccessDeniedException();
+            }
+            $roleUser = true;
+        }
+
         $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);
@@ -56,10 +69,17 @@ class UserController extends Controller
         if ($form->isValid()) {
             $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
+            if ($roleUser) {
+                $user->setRoles(array('ROLE_USER'));
+            }
 
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', "L'utilisateur a bien été modifié");
+
+            if ($roleUser) {
+                return $this->redirectToRoute('homepage');
+            }
 
             return $this->redirectToRoute('user_list');
         }

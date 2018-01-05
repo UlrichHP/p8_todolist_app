@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
+        <meta name="description" content="OpenClassrooms 8th project">
         <meta name="author" content="">
 
         <title>To Do List app</title>
@@ -38,7 +38,10 @@
         <!-- Page Content -->
         <div class="container">
             <div class="row">
+                {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('user_create') }}" class="btn btn-primary">Créer un utilisateur</a>
+                <a href="{{ path('user_list') }}" class="btn btn-primary">Liste des utilisateurs</a>
+                {% endif %}
 
                 {% if app.user %}
                 <a href="{{ path('logout') }}" class="pull-right btn btn-danger">Se déconnecter</a>
