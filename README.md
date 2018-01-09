@@ -1,6 +1,6 @@
 # Projet 8 - Améliorez une application existante de ToDo & Co
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/965db7fbc4544adc9cc77cbb2dcdbb45)](https://www.codacy.com/app/Maxxxiimus92/p8_todolist_app?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Maxxxiimus92/p8_todolist_app&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/931b45655ca141aea9f99d5599b6bc13)](https://www.codacy.com/app/Maxxxiimus92/p8_todolist_app?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Maxxxiimus92/p8_todolist_app&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/Maxxxiimus92/p8_todolist_app.svg?branch=master)](https://travis-ci.org/Maxxxiimus92/p8_todolist_app)
 
 Ce projet a pour but d'améliorer l'application ToDoList créée par [Saro0h](https://github.com/saro0h/projet8-TodoList) pour OpenClassrooms.
