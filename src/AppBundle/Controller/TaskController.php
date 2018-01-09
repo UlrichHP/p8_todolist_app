@@ -28,13 +28,14 @@ class TaskController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $task->setUser($this->getUser());
 
             $em->persist($task);
             $em->flush();
 
-            $this->addFlash('success', 'La tâche a été bien été ajoutée.');
+            $this->addFlash('success', 'La tâche a bien été ajoutée.');
 
             return $this->redirectToRoute('task_list');
         }
@@ -43,7 +44,7 @@ class TaskController extends Controller
     }
 
     /**
-     * @Route("/tasks/{id}/edit", name="task_edit")
+     * @Route("/tasks/edit/{id}", name="task_edit")
      */
     public function editAction(Task $task, Request $request)
     {
@@ -51,7 +52,7 @@ class TaskController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'La tâche a bien été modifiée.');
@@ -66,7 +67,7 @@ class TaskController extends Controller
     }
 
     /**
-     * @Route("/tasks/{id}/toggle", name="task_toggle")
+     * @Route("/tasks/toggle/{id}", name="task_toggle")
      */
     public function toggleTaskAction(Task $task)
     {
@@ -79,7 +80,7 @@ class TaskController extends Controller
     }
 
     /**
-     * @Route("/tasks/{id}/delete", name="task_delete")
+     * @Route("/tasks/delete/{id}", name="task_delete")
      */
     public function deleteTaskAction(Task $task)
     {

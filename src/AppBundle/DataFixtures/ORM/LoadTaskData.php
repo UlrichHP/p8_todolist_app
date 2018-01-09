@@ -17,13 +17,13 @@ class LoadTaskData extends AbstractFixture implements OrderedFixtureInterface
                     'title'     => 'Tâche créée par un admin',
                     'content'   => 'Super admin !',
                     'user'      => $this->getReference('admin01'),
-                    'reference' => 'admin-task'
+                    'reference' => 'admin01-task'
                 ],
                 [
-                    'title'     => 'Tâche crée par user01',
+                    'title'     => 'Tâche créée par user01',
                     'content'   => 'Utilisateur normal !',
                     'user'      => $this->getReference('user01'),
-                    'reference' => 'user-task'
+                    'reference' => 'user01-task'
                 ],
                 [
                     'title'     => 'Ancienne tâche non liée',
